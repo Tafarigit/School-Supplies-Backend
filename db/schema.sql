@@ -7,7 +7,7 @@ CREATE TABLE supplies (
     name TEXT NOT NULL,
     brand TEXT NOT NULL,
     price DECIMAL(3, 2) CHECK (price>0 AND price <= 20),
-    quantity INTEGER CHECK (quantity>0 AND quantity <= 100) ,
+    quantity INTEGER CHECK (quantity>0 AND quantity <= 100),
     description TEXT NOT NULL, 
     in_stock BOOLEAN NOT NULL DEFAULT FALSE
 );
