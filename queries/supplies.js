@@ -1,3 +1,4 @@
+
 const db = require("../db/dbConfig.js");
 
 const getAllSupplies = async () => {
@@ -32,3 +33,4 @@ const createSupplies = async (supply) => {
 }
 
 module.exports = { getAllSupplies, getSupplies, createSupplies };
+

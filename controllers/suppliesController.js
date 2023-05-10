@@ -48,6 +48,15 @@ catch(error){
 }
 );
 
+supplies.put("/:index",(req,res)=>{
+    const {index} = req.params;
+    const supply = req.body; 
+    
+})
 
+//create - 
+//read (+show one) 
+//update - PUT
+//delete - DELETE
 
 module.exports = supplies;
