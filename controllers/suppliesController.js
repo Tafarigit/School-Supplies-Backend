@@ -50,6 +50,8 @@ catch(error){
 }
 );
 
+//DELETE /supplies
+
 supplies.delete("/:id", async (req,res) =>{
     const {id} = req.params;
     const deletedSupply = await deleteSupplies(id);
@@ -59,6 +61,8 @@ supplies.delete("/:id", async (req,res) =>{
         res.status(404).json("item not found")
     }
 })
+
+//EDIT /supplies
 
 supplies.put("/:id", async (req,res)=>{
     const {id} = req.params;
