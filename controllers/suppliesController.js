@@ -5,6 +5,8 @@ const {
   getSupplies,
   getAllSupplies,
   createSupplies,
+  deleteSupplies,
+  updateSupplies
 } = require("../queries/supplies");
 
 // GET /supplies
@@ -48,14 +50,23 @@ catch(error){
 }
 );
 
-supplies.put("/:index",(req,res)=>{
-    const {index} = req.params;
-    const supply = req.body; 
-    
+supplies.delete("/:id", async (req,res) =>{
+    const {id} = req.params;
+    const deletedSupply = await deleteSupplies(id);
+    if(deletedSupply.id){
+        res.status(200).json(deletedSupply);
+    }else{
+        res.status(404).json("item not found")
+    }
+})
+
+supplies.put("/:id", async (req,res)=>{
+    const {id} = req.params;
+    const {name, brand, price, quantity, description, in_stock} = req.body; 
+    const updatedSupply = await updateSupplies(id, req.body);
+    res.status(200).json(updatedSupply);
 })
 
 
-//update - PUT
-//delete - DELETE
 
 module.exports = supplies;
