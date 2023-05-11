@@ -1,4 +1,3 @@
-
 const db = require("../db/dbConfig.js");
 
 const getAllSupplies = async () => {
@@ -32,5 +31,27 @@ const createSupplies = async (supply) => {
     }
 }
 
-module.exports = { getAllSupplies, getSupplies, createSupplies };
+const deleteSupplies = async(id) => {
+    try {
+      const deletedSupply = await db.one(
+        "DELETE FROM supplies WHERE id=$1 RETURNING *",
+        id);
+        return deletedSupply;
+    }catch(error){
+      return {error: error};
+    }
+  }
 
+const updateSupplies = async (id, supply) => {
+    try {
+        const updatedSupply = await db.one(
+            'UPDATE supplies SET name=$1, brand=$2, price=$3, quantity=$4,description=$5,in_stock=$6 where id=$7 RETURNING *',
+            [supply.name, supply.brand, supply.price, supply.quantity, supply.description, supply.in_stock, id]
+        );
+        return updatedSupply;
+    } catch (error) {
+        throw error;
+    }
+};
+
+module.exports = { getAllSupplies, getSupplies, createSupplies, deleteSupplies, updateSupplies};
