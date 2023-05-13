@@ -22,9 +22,10 @@ const getSupplies = async (id) => {
 const createSupplies = async (supply) => {
     try {
         const newSupply = await db.one(
-            'INSERT INTO supplies (name, brand, price, quantity, description, in_stock) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
-            [supply.name, supply.brand, supply.price, supply.quantity,supply.description, supply.in_stock]
+            'INSERT INTO supplies (name, brand, image_url, price, quantity, description, in_stock) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *',
+            [supply.name, supply.brand, supply.image_url, supply.price, supply.quantity, supply.description, supply.in_stock]
         );
+        console.log(newSupply)
         return newSupply;
     } catch (error) {
         throw { error: error };
@@ -45,8 +46,8 @@ const deleteSupplies = async(id) => {
 const updateSupplies = async (id, supply) => {
     try {
         const updatedSupply = await db.one(
-            'UPDATE supplies SET name=$1, brand=$2, price=$3, quantity=$4,description=$5,in_stock=$6 where id=$7 RETURNING *',
-            [supply.name, supply.brand, supply.price, supply.quantity, supply.description, supply.in_stock, id]
+            'UPDATE supplies SET name=$1, brand=$2, image_url=$3, price=$4, quantity=$5,description=$6,in_stock=$7 where id=$8 RETURNING *',
+            [supply.name, supply.brand, supply.image_url, supply.price, supply.quantity, supply.description, supply.in_stock, id]
         );
         return updatedSupply;
     } catch (error) {
