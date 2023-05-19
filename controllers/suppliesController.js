@@ -42,11 +42,11 @@ supplies.post("/", async (req, res) => {
 try{
     const newSupplies =  await createSupplies(req.body);
     res.status(200).json(newSupplies);
+    console.log("this one:",newSupplies)
 }
 catch(error){
     res.status(400).json({error: error});
 }
-   
 }
 );
 
@@ -71,6 +71,6 @@ supplies.put("/:id", async (req,res)=>{
     res.status(200).json(updatedSupply);
 })
 
-
+//add error message 
 
 module.exports = supplies;
